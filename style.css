@@ -1,0 +1,32 @@
+
+body {
+    font-family: Arial;
+    background: lightgray;
+    margin: 20px;
+}
+
+input, button {
+    padding: 8px;
+    margin: 5px;
+}
+
+.box {
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid gray;
+    padding: 8px;
+}
+
+th {
+    background: navy;
+    color: white;
+}

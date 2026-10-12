@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Management System</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body ng-controller="myCtrl" ng-init="page='home'">
+
+<h2>{{title}}</h2>
+<p>Welcome {{form.name}}</p>
+
+<button ng-click="page='home'">Home</button>
+<button ng-click="page='add'">Add Record</button>
+<button ng-click="page='view'; load()">View Records</button>
+
+<div class="box" ng-show="page=='home'">
+    <h3>Welcome to {{title}}</h3>
+    <p>Manage your records easily.</p>
+</div>
+
+<div class="box" ng-show="page=='add'">
+    <h3>Add Record</h3>
+    <form ng-submit="save()">
+        <input ng-model="form.name" placeholder="Name" required>
+        <input ng-model="form.category" placeholder="Category" required>
+        <input ng-model="form.details" placeholder="Details" required>
+        <button type="submit">{{editing ? 'Update' : 'Add'}}</button>
+        <button type="button" ng-click="form={}; editing=false">Clear</button>
+    </form>
+    <p ng-show="message">{{message}}</p>
+</div>
+
+<div class="box" ng-show="page=='view'">
+    <h3>View Records</h3>
+    <input ng-model="search" placeholder="Search records">
+
+    <table>
+        <tr>
+            <th>ID</th><th>Name</th><th>Category</th>
+            <th>Details</th><th>Actions</th>
+        </tr>
+        <tr ng-repeat="r in records | filter:search">
+            <td>{{$index+1}}</td>
+            <td>{{r.name}}</td>
+            <td>{{r.category}}</td>
+            <td>{{r.details}}</td>
+            <td>
+                <button ng-click="edit(r)">Edit</button>
+                <button ng-click="del(r._id)">Delete</button>
+            </td>
+        </tr>
+    </table>
+
+    <p ng-if="records.length==0">No records found</p>
+    <p ng-hide="records.length==0">Records are available</p>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
